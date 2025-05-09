@@ -11,8 +11,7 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import tn.esprit.tpfoyer.entity.Blo
-c;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.repository.BlocRepository;
 import tn.esprit.tpfoyer.service.BlocServiceImpl;
 
