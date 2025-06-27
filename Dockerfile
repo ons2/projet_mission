@@ -1,4 +1,4 @@
 FROM openjdk:11-jdk-slim
 EXPOSE 8089
-ADD target/tp-foyer-5.0.5.jar tp-foyer.jar
+ADD target/tp-foyer-5.0.6.jar tp-foyer.jar
 ENTRYPOINT ["java", "-jar", "/tp-foyer.jar"]
