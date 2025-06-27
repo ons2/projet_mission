@@ -15,7 +15,7 @@ services:
       - tp-network
 
   tp-foyer-app:
-    image: onsbz/tp-foyer:1.0.0
+    image: onsbz/tp-foyer:v5.0.7
     container_name: tp-foyer-container
     depends_on:
       - mysql-db
