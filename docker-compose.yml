@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: foyerdb
+      MYSQL_USER: foyeruser
+      MYSQL_PASSWORD: foyerpass
+    ports:
+      - "3306:3306"
+    networks:
+      - tp-network
+
+  tp-foyer-app:
+    image: onsbz/tp-foyer:1.0.0
+    container_name: tp-foyer-container
+    depends_on:
+      - mysql-db
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/foyerdb
+      SPRING_DATASOURCE_USERNAME: foyeruser
+      SPRING_DATASOURCE_PASSWORD: foyerpass
+    networks:
+      - tp-network
+
+networks:
+  tp-network:
+    driver: bridge
