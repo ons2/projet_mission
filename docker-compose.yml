@@ -19,12 +19,46 @@ services:
     container_name: tp-foyer-container
     depends_on:
       - mysql-db
+      - otel-collector
     ports:
       - "8082:8082"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/foyerdb
       SPRING_DATASOURCE_USERNAME: foyeruser
       SPRING_DATASOURCE_PASSWORD: foyerpass
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      OTEL_SERVICE_NAME: tp-foyer
+    networks:
+      - tp-network
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector-container
+    command: ["--config=/etc/otel-collector-config.yml"]
+    volumes:
+      - ./otel-collector-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - "4317:4317"
+      - "8888:8888"
+      - "8889:8889"
+    networks:
+      - tp-network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus-container
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - tp-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana-container
+    ports:
+      - "3000:3000"
     networks:
       - tp-network
 
