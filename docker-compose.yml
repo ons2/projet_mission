@@ -15,7 +15,7 @@ services:
       - tp-network
 
   tp-foyer-app:
-    image: onsbz/tp-foyer:v5.0.8
+    image: onsbz/tp-foyer:v5.0.9
     container_name: tp-foyer-container
     depends_on:
       - mysql-db
@@ -58,7 +58,7 @@ services:
     image: grafana/grafana
     container_name: grafana-container
     ports:
-      - "3000:3000"
+      - "3001:3000"
     networks:
       - tp-network
 
