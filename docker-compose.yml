@@ -21,7 +21,7 @@ services:
       - mysql-db
       - otel-collector
     ports:
-      - "8082:8082"
+      - "8089:8089"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/foyerdb
       SPRING_DATASOURCE_USERNAME: foyeruser
