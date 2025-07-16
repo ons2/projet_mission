@@ -13,13 +13,20 @@ services:
       - "3306:3306"
     networks:
       - tp-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   tp-foyer-app:
     image: onsbz/tp-foyer:v5.0.13
     container_name: tp-foyer-container
     depends_on:
-      - mysql-db
-      - otel-collector
+      mysql-db:
+        condition: service_healthy
+      otel-collector:
+        condition: service_started
     ports:
       - "8089:8089"
     environment:
