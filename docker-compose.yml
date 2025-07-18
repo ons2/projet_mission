@@ -10,7 +10,7 @@ services:
       MYSQL_USER: foyeruser
       MYSQL_PASSWORD: foyerpass
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - tp-network
     healthcheck:
@@ -20,7 +20,7 @@ services:
       retries: 5
 
   tp-foyer-app:
-    image: onsbz/tp-foyer:v5.0.19
+    image: onsbz/tp-foyer:v5.0.20
     container_name: tp-foyer-container
     depends_on:
       mysql-db:
