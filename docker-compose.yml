@@ -14,13 +14,13 @@ services:
     networks:
       - tp-network
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot" ]
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
 
   tp-foyer-app:
-    image: onsbz/tp-foyer:v5.0.18
+    image: onsbz/tp-foyer:v5.0.19
     container_name: tp-foyer-container
     depends_on:
       mysql-db:
